@@ -1,7 +1,7 @@
-import slider from "./assets/images/icon-slider.svg";
 import check from "./assets/images/icon-check.svg";
 import Toggle from "./components/Toggle";
 import { useState } from "react";
+import Slider from "./components/Slider";
 
 function App() {
   const [isMonthly, setIsMonthly] = useState(true);
@@ -10,6 +10,10 @@ function App() {
     console.log("Toggle");
     setIsMonthly(!isMonthly);
   }
+
+  const options: number[] = [0, 25, 50, 75, 100];
+
+  const startingOption: number = 2;
 
   return (
     <main>
@@ -21,9 +25,7 @@ function App() {
       <section className="plan-section">
         <div className="slider-section">
           <span className="pageviews">XXX Pageviews</span>
-          <div className="bar">
-            <img src={slider} alt="" />
-          </div>
+          <Slider options={options} startingOption={startingOption}></Slider>
           <h2>
             <strong>$ XXX</strong> /month
           </h2>
