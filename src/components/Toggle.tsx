@@ -10,7 +10,7 @@ const Toggle: React.FunctionComponent<ToggleProps> = ({
   return (
     <button className="toggle" onClick={handleToggle}>
       <span
-        className={isMonthly ? "toggle-circle right" : "toggle-circle left"}
+        className={isMonthly ? "toggle-circle left" : "toggle-circle right"}
       ></span>
     </button>
   );

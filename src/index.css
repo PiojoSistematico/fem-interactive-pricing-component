@@ -187,27 +187,69 @@ p {
   padding: var(--size-600);
 }
 
-.slider {
-  position: relative;
+.slider-box {
   width: 100%;
-  background-color: var(--clr-neutral-light-grayish-blue);
-  height: 10px;
-  border-radius: 10px;
 }
 
-.slider-button {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  background-color: var(--clr-primary-strong-cyan);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.slider {
+  width: 100%;
   border: none;
-  border-radius: 100px;
-  top: 0;
-  transform: translate(0, -15px);
-  box-shadow: 0 0.5rem 1rem 0.4rem var(--clr-primary-soft-cyan);
+  height: var(--size-200);
+  border-radius: var(--size-400);
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-runnable-track {
+  border: none;
+}
+
+.slider::-moz-range-track {
+  border: none;
+}
+
+.slider::-ms-track {
+  border: none;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--size-600);
+  height: var(--size-600);
+  border: none;
+  border-radius: var(--size-2000);
+  background-image: url("icon-slider.svg");
+  background-color: var(--clr-primary-strong-cyan);
+  background-size: var(--size-400) var(--size-400);
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: grab;
+}
+
+.slider::-moz-range-thumb {
+  width: var(--size-600);
+  height: var(--size-600);
+  border: none;
+  border-radius: var(--size-2000);
+  background-image: url("icon-slider.svg");
+  background-color: var(--clr-primary-strong-cyan);
+  background-size: var(--size-400) var(--size-400);
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: grab;
+}
+
+.slider::-ms-thumb {
+  width: var(--size-600);
+  height: var(--size-600);
+  border: none;
+  border-radius: var(--size-2000);
+  background-image: url("icon-slider.svg");
+  background-color: var(--clr-primary-strong-cyan);
+  background-size: var(--size-400) var(--size-400);
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: grab;
 }
 
 .grab {

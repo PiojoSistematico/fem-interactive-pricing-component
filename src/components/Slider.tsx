@@ -1,91 +1,39 @@
-import { useState } from "react";
-import iconSlider from "../assets/images/icon-slider.svg";
-
-type SliderProps = {
-  options: number[];
-  startingOption: number;
+type sliderProps = {
+  min: number;
+  max: number;
+  step: number;
+  value: number;
+  setOption: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const Slider: React.FunctionComponent<SliderProps> = ({
-  options,
-  startingOption,
+const Slider: React.FunctionComponent<sliderProps> = ({
+  min,
+  max,
+  step,
+  value,
+  setOption,
 }) => {
-  const [isMouseDown, setIsMouseDown] = useState(false);
-
-  function handleMouseDown(event: MouseEvent): void {
-    setIsMouseDown(true);
-    const slider = document.querySelector(".slider") as HTMLDivElement;
-    const mouseX = event.clientX - slider.getBoundingClientRect().left;
-    const newPosition = Math.max(
-      0,
-      Math.min(100, (mouseX / slider.offsetWidth) * 100)
-    );
-    const closestPosition = options.reduce((prev, curr) =>
-      Math.abs(curr - newPosition) < Math.abs(prev - newPosition) ? curr : prev
-    );
-    const sliderButton = document.querySelector(
-      ".slider-button"
-    ) as HTMLButtonElement;
-    sliderButton.style.transform = `translateX(${closestPosition}%)`;
-  }
+  const fillRatio = (value * 100) / (max - min);
+  console.log(value, fillRatio);
 
   return (
-    <div className="slider">
-      <button
-        onMouseDown={(e) => handleMouseDown(e)}
-        onMouseUp={() => setIsMouseDown(false)}
-        onMouseLeave={() => setIsMouseDown(false)}
-        className={
-          isMouseDown ? "slider-button grabbing" : "slider-button grab"
-        }
-      >
-        <img src={iconSlider} alt="" />
-      </button>
+    <div className="slider-box">
+      <input
+        type="range"
+        className="slider"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onInput={(e) => setOption(e.target.value)}
+        style={{
+          backgroundImage: `linear-gradient(90deg, hsl(174, 77%, 80%) 0%,hsl(174, 77%, 80%) ${fillRatio}%, hsl(224, 65%, 95%) ${
+            fillRatio + 1
+          }%, hsl(224, 65%, 95%) 100%)`,
+        }}
+      ></input>
     </div>
   );
 };
 
 export default Slider;
-
-/* 
-
-import React, { useState } from 'react';
-import './Slider.css'; // Import your CSS file
-
-const Slider = () => {
-  const positions = [0, 25, 50, 75, 100]; // Percentage positions
-  const [isDragging, setIsDragging] = useState(false);
-
-  const handleMouseDown = () => {
-    setIsDragging(true);
-    document.body.style.cursor = 'grabbing';
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging) return;
-
-    const slider = document.querySelector('.slider');
-    const mouseX = e.clientX - slider.getBoundingClientRect().left;
-    const newPosition = Math.max(0, Math.min(100, (mouseX / slider.offsetWidth) * 100));
-
-    const closestPosition = positions.reduce((prev, curr) =>
-      Math.abs(curr - newPosition) < Math.abs(prev - newPosition) ? curr : prev
-    );
-
-    const sliderButton = document.querySelector('.slider-button');
-    sliderButton.style.transform = `translateX(${closestPosition}%)`;
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    document.body.style.cursor = 'default';
-  };
-
-  return (
-    <div className="slider" onMouseMove={handleMouseMove} onMouseUp={handleMouseUp}>
-      <div className="slider-button" onMouseDown={handleMouseDown}></div>
-    </div>
-  );
-};
-
-export default Slider; */

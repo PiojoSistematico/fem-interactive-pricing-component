@@ -1,19 +1,33 @@
 import check from "./assets/images/icon-check.svg";
 import Toggle from "./components/Toggle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "./components/Slider";
+
+type dataProps = {
+  pageViews: string;
+  cost: number;
+};
 
 function App() {
   const [isMonthly, setIsMonthly] = useState(true);
+  const [data, setData] = useState<dataProps[]>([
+    { pageViews: "1K", cost: 1 },
+    { pageViews: "1K", cost: 1 },
+    { pageViews: "1K", cost: 1 },
+  ]);
+
+  const [option, setOption] = useState(2);
+
+  useEffect(() => {
+    fetch("data.json")
+      .then((res) => res.json())
+      .then((info) => setData(info));
+  }, []);
 
   function handleToggle(): void {
     console.log("Toggle");
     setIsMonthly(!isMonthly);
   }
-
-  const options: number[] = [0, 25, 50, 75, 100];
-
-  const startingOption: number = 2;
 
   return (
     <main>
@@ -24,10 +38,19 @@ function App() {
       </section>
       <section className="plan-section">
         <div className="slider-section">
-          <span className="pageviews">XXX Pageviews</span>
-          <Slider options={options} startingOption={startingOption}></Slider>
+          <span className="pageviews">{data[option].pageViews} Pageviews</span>
+          <Slider
+            min={0}
+            max={4}
+            step={1}
+            value={option}
+            setOption={setOption}
+          ></Slider>
           <h2>
-            <strong>$ XXX</strong> /month
+            <strong>
+              $ {isMonthly ? data[option].cost : data[option].cost * 12 * 0.75}
+            </strong>{" "}
+            {isMonthly ? "/month" : "/year"}
           </h2>
           <div className="toggle-section">
             <span>Monthly Billing</span>
