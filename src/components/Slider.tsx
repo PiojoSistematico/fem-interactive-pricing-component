@@ -14,7 +14,6 @@ const Slider: React.FunctionComponent<sliderProps> = ({
   setOption,
 }) => {
   const fillRatio = (value * 100) / (max - min);
-  console.log(value, fillRatio);
 
   return (
     <div className="slider-box">
@@ -25,7 +24,9 @@ const Slider: React.FunctionComponent<sliderProps> = ({
         max={max}
         step={step}
         value={value}
-        onInput={(e) => setOption(e.target.value)}
+        onInput={(e: React.ChangeEvent<HTMLInputElement>) =>
+          setOption(Number(e.target.value))
+        }
         style={{
           backgroundImage: `linear-gradient(90deg, hsl(174, 77%, 80%) 0%,hsl(174, 77%, 80%) ${fillRatio}%, hsl(224, 65%, 95%) ${
             fillRatio + 1

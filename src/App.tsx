@@ -2,6 +2,8 @@ import check from "./assets/images/icon-check.svg";
 import Toggle from "./components/Toggle";
 import { useEffect, useState } from "react";
 import Slider from "./components/Slider";
+import circles from "./assets/images/pattern-circles.svg";
+import bg from "./assets/images/bg-pattern.svg";
 
 type dataProps = {
   pageViews: string;
@@ -25,13 +27,14 @@ function App() {
   }, []);
 
   function handleToggle(): void {
-    console.log("Toggle");
     setIsMonthly(!isMonthly);
   }
 
   return (
     <main>
+      <img src={bg} alt="background" className="background" />
       <section className="title-section">
+        <img src={circles} alt="circles image" className="circles" />
         <h1> Simple, traffic-based pricing</h1>
         <p>Sign-up for our 30-day trial.</p>
         <p>No credit card required. </p>
@@ -56,7 +59,8 @@ function App() {
             <span>Monthly Billing</span>
             <Toggle isMonthly={isMonthly} handleToggle={handleToggle}></Toggle>
             <span>Yearly Billing</span>
-            <span className="discount">-25%</span>
+            <span className="discount mobile">-25%</span>
+            <span className="discount desktop">-25% discount</span>
           </div>
         </div>
 
