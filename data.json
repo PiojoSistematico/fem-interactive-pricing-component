@@ -1,0 +1,7 @@
+[
+  { "pageViews": "30K", "cost": 8 },
+  { "pageViews": "50K", "cost": 12 },
+  { "pageViews": "100K", "cost": 16 },
+  { "pageViews": "500K", "cost": 24 },
+  { "pageViews": "1M", "cost": 36 }
+]
